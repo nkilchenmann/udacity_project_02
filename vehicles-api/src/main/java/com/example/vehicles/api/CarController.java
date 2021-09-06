@@ -1,28 +1,21 @@
 package com.example.vehicles.api;
 
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
 import com.example.vehicles.domain.car.Car;
 import com.example.vehicles.service.CarService;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.Valid;
 
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Implements a REST-based controller for the Vehicles API.
@@ -63,6 +56,11 @@ class CarController {
          * TODO: Use the `assembler` on that car and return the resulting output.
          *   Update the first line as part of the above implementing.
          */
+
+        //my implementation (start)
+        carService.findById(id);
+        //my implementation (end)
+
         return assembler.toResource(new Car());
     }
 
@@ -79,6 +77,11 @@ class CarController {
          * TODO: Use the `assembler` on that saved car and return as part of the response.
          *   Update the first line as part of the above implementing.
          */
+
+        //my implementation (start)
+        carService.save(car);
+        //my implementation (end)
+
         Resource<Car> resource = assembler.toResource(new Car());
         return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
     }
@@ -97,6 +100,11 @@ class CarController {
          * TODO: Use the `assembler` on that updated car and return as part of the response.
          *   Update the first line as part of the above implementing.
          */
+
+        //my implementation (start)
+
+        //my implementation (end)
+
         Resource<Car> resource = assembler.toResource(new Car());
         return ResponseEntity.ok(resource);
     }
@@ -111,6 +119,11 @@ class CarController {
         /**
          * TODO: Use the Car Service to delete the requested vehicle.
          */
+
+        //my implementation (start)
+        carService.delete(id);
+        //my implementation (end)
+
         return ResponseEntity.noContent().build();
     }
 }
