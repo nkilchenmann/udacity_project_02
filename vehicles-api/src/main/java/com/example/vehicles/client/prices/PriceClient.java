@@ -37,8 +37,11 @@ public class PriceClient {
             Price price = client
                     .get()
                     .uri(uriBuilder -> uriBuilder
-                            .path("services/price/")
-                            .queryParam("vehicleId", vehicleId)
+                            //Done: Commented out as no longer working with most recent version of Spring Data Rest
+                            //.path("services/price/")
+                            .path("/services/prices/" + vehicleId)
+                            //Done: Commented out as no longer working with most recent version of Spring Data Rest
+                            //.queryParam("vehicleId", vehicleId)
                             .build()
                     )
                     .retrieve().bodyToMono(Price.class).block();

@@ -26,7 +26,7 @@ public class CarService {
 
     public CarService(CarRepository repository/*my implementation (start)*/, MapsClient mapsClient, PriceClient priceClient/*my implementation (start)*/) {
         /**
-         * TODO: Add the Maps and Pricing Web Clients you create
+         * DONE: Add the Maps and Pricing Web Clients you create
          *   in `VehiclesApiApplication` as arguments and set them here.
          */
 
@@ -55,7 +55,7 @@ public class CarService {
      */
     public Car findById(Long id) {
         /**
-         * TODO: Find the car by ID from the `repository` if it exists.
+         * DONE: Find the car by ID from the `repository` if it exists.
          *   If it does not exist, throw a CarNotFoundException
          *   Remove the below code as part of your implementation.
          */
@@ -125,21 +125,22 @@ public class CarService {
      */
     public void delete(Long id) {
         /**
-         * TODO: Find the car by ID from the `repository` if it exists.
+         * DONE: Find the car by ID from the `repository` if it exists.
          *   If it does not exist, throw a CarNotFoundException
          */
 
-        //my implementation (start)
-
-        //my implementation (end)
-
         /**
-         * TODO: Delete the car from the repository.
+         * DONE: Delete the car from the repository.
          */
 
         //my implementation (start)
-
+        if (repository.findById(id).isPresent()) {
+            repository.deleteById(id);
+            System.out.println("Car with id: " + id + " has been deleted!");
+        } else {
+            System.out.println("No car has been found with id: " + id);
+            throw new CarNotFoundException();
+        }
         //my implementation (end)
-
     }
 }
