@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/boogle-maps/boogle-maps.iml" filepath="$PROJECT_DIR$/boogle-maps/boogle-maps.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/pricing-service/pricing-service.iml" filepath="$PROJECT_DIR$/pricing-service/pricing-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/udacity_project_02.iml" filepath="$PROJECT_DIR$/udacity_project_02.iml" />
