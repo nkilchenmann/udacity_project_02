@@ -76,12 +76,24 @@ public class CarControllerTest {
     @Test
     public void createCarTest() throws Exception {
         Car car = getCar();
-        mvc.perform(
+        car.setId(1L);
+        String expectedCarJsonRepresentation = json.write(car).getJson();
+
+        MvcResult mvcResult = mvc.perform(
                         post(new URI("/cars"))
                                 .content(json.write(car).getJson())
                                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                                 .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        Car obtainedCar = json.parseObject(mvcResult.getResponse().getContentAsString());
+        String obtainedCarJsonRepresentation = json.write(obtainedCar).getJson();
+
+        // assert that obtained = expected (String comparison)
+        Assert.assertEquals(expectedCarJsonRepresentation, obtainedCarJsonRepresentation);
+
+
     }
 
     /**
