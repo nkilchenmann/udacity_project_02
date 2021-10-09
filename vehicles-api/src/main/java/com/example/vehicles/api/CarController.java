@@ -69,7 +69,6 @@ class CarController {
         } catch (Exception e) {
             throw new CarNotFoundException("No car exists with id: " + id);
         }
-
     }
 
     /**
@@ -87,11 +86,8 @@ class CarController {
          * DONE: Use the `assembler` on that saved car and return as part of the response.
          *   Update the first line as part of the above implementing.
          */
-
-        //my implementation (start)
         Resource<Car> resource = assembler.toResource(carService.findById(carService.save(car).getId()));
         return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
-        //my implementation (end)
     }
 
     /**
@@ -110,16 +106,10 @@ class CarController {
          * DONE: Use the `assembler` on that updated car and return as part of the response.
          *   Update the first line as part of the above implementing.
          */
-
-        //my implementation (start)
         car.setId(id);
         carService.save(car);
         Resource<Car> resource = assembler.toResource(carService.findById(id));
         return ResponseEntity.ok(resource);
-        //my implementation (end)
-
-        //Resource<Car> resource = assembler.toResource(new Car());
-        //return ResponseEntity.ok(resource);
     }
 
     /**
@@ -134,11 +124,7 @@ class CarController {
         /**
          * DONE: Use the Car Service to delete the requested vehicle.
          */
-
-        //my implementation (start)
         carService.delete(id);
-        //my implementation (end)
-
         return ResponseEntity.noContent().build();
     }
 }

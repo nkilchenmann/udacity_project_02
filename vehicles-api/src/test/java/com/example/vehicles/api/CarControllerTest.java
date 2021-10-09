@@ -74,7 +74,7 @@ public class CarControllerTest {
      * @throws Exception when car creation fails in the system
      */
     @Test
-    public void createCar() throws Exception {
+    public void createCarTest() throws Exception {
         Car car = getCar();
         mvc.perform(
                         post(new URI("/cars"))
@@ -90,13 +90,12 @@ public class CarControllerTest {
      * @throws Exception if the read operation of the vehicle list fails
      */
     @Test
-    public void listCars() throws Exception {
+    public void listCarsTest() throws Exception {
         /**
          * DONE: Add a test to check that the `get` method works by calling
          *   the whole list of vehicles. This should utilize the car from `getCar()`
          *   below (the vehicle will be the first in the list).
          */
-        //my implementation (start)
         // expected Car
         Car expectedCar = getCar();
         expectedCar.setId(1L);
@@ -110,7 +109,6 @@ public class CarControllerTest {
 
         // assert that obtained = expected (String comparison)
         Assert.assertEquals(expectedCarJsonRepresentation, obtainedCarJsonRepresentation);
-        //my implementation (end)
     }
 
     /**
@@ -119,7 +117,7 @@ public class CarControllerTest {
      * @throws Exception if the read operation for a single car fails
      */
     @Test
-    public void findCar() throws Exception {
+    public void findCarTest() throws Exception {
         /**
          * DONE: Add a test to check that the `get` method works by calling
          *   a vehicle by ID. This should utilize the car from `getCar()` below.
@@ -137,7 +135,6 @@ public class CarControllerTest {
 
         // assert that obtained = expected
         Assert.assertEquals(expectedCarJsonRepresentation, obtainedCarJsonRepresentation);
-        //my implementation (end)
     }
 
     /**
@@ -146,14 +143,30 @@ public class CarControllerTest {
      * @throws Exception if the delete operation of a vehicle fails
      */
     @Test
-    public void deleteCar() throws Exception {
+    public void deleteCarTest() throws Exception {
         /**
          * DONE: Add a test to check whether a vehicle is appropriately deleted
          *   when the `delete` method is called from the Car Controller. This
          *   should utilize the car from `getCar()` below.
          */
         mvc.perform(delete(new URI("/cars/1"))).andExpect(status().isNoContent());
+    }
 
+    @Test
+    public void updateCarTest() throws Exception {
+        /**
+         * DONE: Add a test to check whether a vehicle is appropriately updated
+         *   when the `put` method is called from the Car Controller. This
+         *   should utilize the car from `getCar()` below.
+         */
+        Car car = getCar();
+
+        mvc.perform(
+                        put(new URI("/cars/1"))
+                                .content(json.write(car).getJson())
+                                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
     }
 
     /**

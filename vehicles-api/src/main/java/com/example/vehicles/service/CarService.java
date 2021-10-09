@@ -19,22 +19,16 @@ public class CarService {
 
     private final CarRepository repository;
 
-    //my implementation (start)
     private MapsClient mapsClient;
     private PriceClient priceClient;
-    //my implementation (end)
 
-    public CarService(CarRepository repository/*my implementation (start)*/, MapsClient mapsClient, PriceClient priceClient/*my implementation (start)*/) {
+    public CarService(CarRepository repository, MapsClient mapsClient, PriceClient priceClient) {
         /**
          * DONE: Add the Maps and Pricing Web Clients you create
          *   in `VehiclesApiApplication` as arguments and set them here.
          */
-
-        //my implementation (start)
         this.mapsClient = mapsClient;
         this.priceClient = priceClient;
-        //my implementation (end)
-
         this.repository = repository;
     }
 
@@ -60,7 +54,7 @@ public class CarService {
          *   Remove the below code as part of your implementation.
          */
         Car car = new Car();
-        //my implementation (start)
+
         Optional<Car> optionalCar = repository.findById(id);
 
         if (optionalCar.isPresent()) {
@@ -68,8 +62,6 @@ public class CarService {
         } else {
             throw new CarNotFoundException();
         }
-        //my implementation (end)
-
 
         /**
          * DONE: Use the Pricing Web client you create in `VehiclesApiApplication`
@@ -79,9 +71,7 @@ public class CarService {
          *   the pricing service each time to get the price.
          */
 
-        //my implementation (start)
         car.setPrice(priceClient.getPrice(id));
-        //my implementation (end)
 
         /**
          * DONE: Use the Maps Web client you create in `VehiclesApiApplication`
@@ -92,9 +82,7 @@ public class CarService {
          * meaning the Maps service needs to be called each time for the address.
          */
 
-        //my implementation (start)
         car.setLocation(mapsClient.getAddress(car.getLocation()));
-        //my implementation (end)
 
         return car;
     }
@@ -111,6 +99,7 @@ public class CarService {
                     .map(carToBeUpdated -> {
                         carToBeUpdated.setDetails(car.getDetails());
                         carToBeUpdated.setLocation(car.getLocation());
+                        carToBeUpdated.setCondition(car.getCondition());
                         return repository.save(carToBeUpdated);
                     }).orElseThrow(CarNotFoundException::new);
         }
@@ -128,12 +117,9 @@ public class CarService {
          * DONE: Find the car by ID from the `repository` if it exists.
          *   If it does not exist, throw a CarNotFoundException
          */
-
         /**
          * DONE: Delete the car from the repository.
          */
-
-        //my implementation (start)
         if (repository.findById(id).isPresent()) {
             repository.deleteById(id);
             System.out.println("Car with id: " + id + " has been deleted!");
@@ -141,6 +127,5 @@ public class CarService {
             System.out.println("No car has been found with id: " + id);
             throw new CarNotFoundException();
         }
-        //my implementation (end)
     }
 }
